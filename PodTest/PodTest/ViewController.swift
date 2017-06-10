@@ -41,7 +41,7 @@ class ViewController: UIViewController {
                     return
             },
             result_hook : {
-                (result: String) -> (Void) in
+                (result: Bool) -> (Void) in
                 print(self.bs?.user_id)
                 print(result)
                 return
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
                 return
             },
             result_hook : {
-                (result: String) -> (Void) in
+                (result: Bool) -> (Void) in
                 print(self.bs2?.user_id)
                 print(result)
                 return
