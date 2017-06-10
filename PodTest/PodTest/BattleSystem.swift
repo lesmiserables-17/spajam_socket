@@ -12,14 +12,17 @@ import SocketIO
 class BattleSystem {
     public var user_id: String
     var socket: SocketIOClient!
+    var start_hook: () -> (Void)
     var status_hook: (String) -> (Void)
     var result_hook : (String) -> (Void)
     
     init(user_id:String,
+         start_hook  :  @escaping () -> (Void),
          status_hook :  @escaping (String) -> (Void),
          result_hook :  @escaping (String) -> (Void)
          ) {
         self.user_id = user_id
+        self.start_hook  = start_hook
         self.status_hook = status_hook
         self.result_hook = result_hook
 
@@ -37,6 +40,8 @@ class BattleSystem {
         //socket = appDelegate.socket
         
         socket.on("start"){ data, ack in
+            self.start_hook()
+            
             self.socket.on("status"){ data, ack in
                 print("status")
                 let json = data[0] as? NSDictionary

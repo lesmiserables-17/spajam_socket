@@ -23,13 +23,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
         //let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        
+
         // ここから
         
         self.bs = BattleSystem(
             user_id : "Android",
+            start_hook : {
+                () -> (Void) in
+                print("start Android")
+                return
+            },
             status_hook : {
                 (status: String) -> (Void) in
                     print(self.bs?.user_id)
@@ -46,6 +50,11 @@ class ViewController: UIViewController {
         
         bs2 = BattleSystem(
             user_id : "iOS",
+            start_hook : {
+                () -> (Void) in
+                print("start iOS")
+                return
+            },
             status_hook : {
                 (status: String) -> (Void) in
                 print(self.bs2?.user_id)
@@ -116,7 +125,6 @@ class ViewController: UIViewController {
         self.bs?.defence()
         //socket.emit("defence",String(user_id))
     }
-
-
+    
 }
 
